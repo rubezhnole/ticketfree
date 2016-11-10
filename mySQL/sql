@@ -1,0 +1,43 @@
+password db %rL(Z\73#B2dA<qc
+
+admin password root
+
+
+CREATE SCHEMA `ticketfree` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE `ticketfree`.`user` (
+  `entityId` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(256) NOT NULL,
+  `password` VARCHAR(256) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`entityId`),
+  UNIQUE INDEX `entityId_UNIQUE` (`entityId` ASC));
+
+CREATE TABLE `ticketfree`.`event` (
+  `entityId` INT NOT NULL AUTO_INCREMENT,
+  `mainUser` INT NOT NULL,
+  `backgroundImage` VARCHAR(100) NULL,
+  `title` VARCHAR(256) NOT NULL,
+  `description` VARCHAR(1000) NOT NULL,
+  `venue` VARCHAR(256) NOT NULL,
+  `dateStart` DATETIME NOT NULL,
+  `dateEnd` DATETIME NOT NULL,
+  `createBy` INT NULL,
+  `createDate` DATETIME NULL,
+  `editBy` INT NULL,
+  `editDate` DATETIME NULL,
+  PRIMARY KEY (`entityId`),
+  UNIQUE INDEX `entityId_UNIQUE` (`entityId` ASC));
+
+  CREATE TABLE `ticketfree`.`ticket` (
+    `entityId` INT NOT NULL AUTO_INCREMENT,
+    `event` INT NOT NULL,
+    `user` INT NOT NULL,
+    `active` TINYINT(1) NOT NULL,
+    `uuid` VARCHAR(256) NOT NULL,
+    `createBy` INT NULL,
+    `createDate` DATETIME NULL,
+    `editBy` INT NULL,
+    `editDate` DATETIME NULL,
+    PRIMARY KEY (`entityId`),
+    UNIQUE INDEX `idticket_UNIQUE` (`entityId` ASC));

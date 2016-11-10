@@ -1,0 +1,61 @@
+group 'ticketFree'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'ch.qos.logback:logback-classic:1.1.3'
+
+
+    compile 'org.springframework:spring-core:4.2.5.RELEASE'
+    compile 'org.springframework:spring-webmvc:4.2.5.RELEASE' /*web config*/
+    compile 'org.springframework:spring-jdbc:4.2.5.RELEASE' /*jdbc template*/
+    compile 'org.springframework:spring-orm:4.2.5.RELEASE' /*HibernateTransactionManager, LocalSessionFactoryBean */
+
+
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile 'javax.servlet.jsp:jsp-api:2.2'
+    compile 'javax.servlet:jstl:1.2'
+
+    compile 'mysql:mysql-connector-java:5.1.26' /*jdbc connector*/
+    compile 'commons-dbcp:commons-dbcp:1.4' /*basic data source*/
+
+    compile 'org.hibernate:hibernate-core:5.1.0.Final'
+    compile 'org.hibernate:hibernate-entitymanager:5.1.0.Final'
+
+
+    compile 'com.google.code.gson:gson:2.3.1'
+
+//    compile 'com.github.davidcarboni:encrypted-file-upload:1.0.2'
+    compile 'commons-fileupload:commons-fileupload:1.3.1'
+
+
+    compile 'org.apache.commons:commons-lang3:3.4' /*random*/
+
+    compile 'org.javassist:javassist:3.20.0-GA' /*hibernate exception*/
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.4'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.4'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.8.4'
+
+    // https://mvnrepository.com/artifact/com.itextpdf/itextpdf html to pdf
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.10'
+
+    // https://mvnrepository.com/artifact/com.itextpdf.tool/xmlworker
+    compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.10'
+
+    // https://mvnrepository.com/artifact/com.google.zxing/core qr generator
+    compile group: 'com.google.zxing', name: 'core', version: '3.3.0'
+
+}
