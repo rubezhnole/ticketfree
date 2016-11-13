@@ -2,19 +2,23 @@ package com.ticketfree.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ticketfree.entity.bean.Event;
+import com.ticketfree.entity.bean.User;
+import com.ticketfree.service.dao.BaseDao;
 import com.ticketfree.util.JacksonUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.Date;
 
 @Controller
 @RequestMapping("event")
 public class EventController {
+
+    @Autowired private BaseDao baseDao;
 
     @RequestMapping("load")
     public ModelAndView load(@RequestParam("eventId") Integer eventId,
@@ -26,19 +30,11 @@ public class EventController {
     }
 
 
-    @RequestMapping(value = "load/{id}", produces = "application/json")
+    @RequestMapping(value = "load/{id}", produces = "application/json", method = RequestMethod.GET)
     @ResponseBody
     public String loadEvent(@PathVariable("id") Integer eventId) throws Exception {
-
-        Event event = new Event();
-        event.setEntityId(1);
-        event.setTitle("first event");
-        event.setDescription("super event");
-        event.setVenue("my home");
-        event.setDateStart(new Date());
-        event.setDateEnd(new Date(new Date().getTime() + 100000));
-
-       return JacksonUtil.toJson(event);
+        Event event = baseDao.findById(Event.class, eventId);
+        return JacksonUtil.toJson(event);
     }
 
     @RequestMapping("create")
@@ -47,8 +43,26 @@ public class EventController {
         return "eventCreate";
     }
 
-    @RequestMapping("save")
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
     public String save(String json) {
+
+        try {
+            User byId = baseDao.findById(User.class, 1);
+
+            Event event = JacksonUtil.toObj(json, Event.class);
+            event.setMainUser(byId);
+            event.setDateStart(new Date());
+            event.setDateEnd(new Date());
+
+            baseDao.save(event, byId);
+
+            System.out.println(event
+            );
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         return "";

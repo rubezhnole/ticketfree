@@ -1,8 +1,11 @@
 package com.ticketfree.entity.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ticketfree.entity.baseentity.HistoryEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -10,6 +13,7 @@ import java.util.Date;
 @Table(name = "event")
 public class Event extends HistoryEntity {
 
+    @JsonIgnore
     private User mainUser;
     private String backgroundImage;
     private String title;
@@ -22,6 +26,8 @@ public class Event extends HistoryEntity {
 
     }
 
+    @ManyToOne
+    @JoinColumn(name="mainUser", nullable=false)
     public User getMainUser() {
         return mainUser;
     }

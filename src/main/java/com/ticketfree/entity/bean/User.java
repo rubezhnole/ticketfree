@@ -1,10 +1,13 @@
 package com.ticketfree.entity.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ticketfree.entity.baseentity.BaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.beans.Transient;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -14,6 +17,8 @@ public class User extends BaseEntity {
     private String password;
 //    private String roles;
     private String email;
+    @JsonIgnore
+    private List<Event> events;
 
     public User() {
 
@@ -49,5 +54,14 @@ public class User extends BaseEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @OneToMany(mappedBy="mainUser")
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }

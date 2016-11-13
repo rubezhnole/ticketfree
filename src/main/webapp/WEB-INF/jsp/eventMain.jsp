@@ -26,13 +26,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Ticket FREE</a>
+            <a class="navbar-brand" href="/mainPage">Ticket FREE</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="/event/create" target="_blank">Create Event</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/ticket/load">My tickets</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -63,11 +63,11 @@
 </footer>
 
 <script>
+    var eventObj = new Event();
 
     $(function() {
-        var event = new Event();
-        event.init();
-        event.load();
+        eventObj.init();
+        eventObj.load();
     })
 </script>
 
@@ -80,6 +80,12 @@
             <li class="list-group-item"><div>{{venue}}</div></li>
             <li class="list-group-item"><div>{{dateStart}}</div></li>
             <li class="list-group-item"><div>{{dateEnd}}</div></li>
+            <li class="list-group-item">
+                <div>
+                    <input type="text" id="number" value="1"/>
+                    <input type="button" id="orderTicket" onclick="eventObj.order();" value="ORDER"/>
+                </div>
+            </li>
         </ul>
 
     </div>

@@ -2,12 +2,14 @@ package com.ticketfree.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.ServletRegistration;
+
 public class WebInitializer
     extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] {RootConfig.class, HibernateConfig.class};
+        return new Class<?>[] {RootConfig.class, HibernateConfig.class, SecurityConfiguration.class};
     }
 
     @Override
@@ -18,5 +20,11 @@ public class WebInitializer
     @Override
     protected String[] getServletMappings() {
         return new String[] {"/"};
+    }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        boolean done = registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+        if (!done) throw new RuntimeException("Page not found");
     }
 }

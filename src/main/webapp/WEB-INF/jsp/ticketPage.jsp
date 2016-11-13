@@ -6,14 +6,15 @@
     <script type="text/javascript" src="/resources/js/jquery.js"></script>
     <script type="text/javascript" src="/resources/js/handlebars.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/resources/js/event.js"></script>
+    <script type="text/javascript" src="/resources/js/ticket.js"></script>
 
     <link href="/resources/css/bootstrap.css" rel="stylesheet">
     <link href="/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
 
-<input type="hidden" id="eventId" value="${eventId}">
+<input type="hidden" id="userId" value="${userId}"/>
+
 
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -30,8 +31,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li class="active"><a href="/event/create" target="_blank">Create Event</a></li>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="/event/create" target="_blank">Create Event</a></li>
                 <li><a href="/ticket/load">My tickets</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -52,23 +53,8 @@
 </nav>
 
 <!-- Begin page content -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="list-group form-group">
-                <li class="list-group-item"><input class="form-control input-sm" id="eventTitle" type="text" placeholder="Title"/></li>
-                <li class="list-group-item"><input class="form-control input-sm" id="eventDescription" type="text" placeholder="Description"/></li>
-                <li class="list-group-item"><input class="form-control input-sm" id="eventVenue" type="text" placeholder="Venue"/></li>
-                <li class="list-group-item"><input class="form-control input-sm" id="dateStart" type="text" placeholder="Date start"/></li>
-                <li class="list-group-item"><input class="form-control input-sm" id="dateEnd" type="text" placeholder="Date end"/></li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <button id="createEventButton">Create</button>
-        </div>
-    </div>
+<div class="container" id="ticketContainer">
+
 </div>
 
 <footer class="footer">
@@ -78,13 +64,26 @@
 </footer>
 
 <script>
+    var ticket = new Ticket();
 
     $(function() {
-        var event = new Event();
-        event.init();
+        ticket.init();
+        ticket.load();
     })
 </script>
 
+<script id="ticketTemplate" type="text/x-handlebars-template">
+    {{#each this}}
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-group">
+                    <li class="list-group-item"><div><a href="/ticket/loadTicket?uuid={{uuid}}" target="_blank">{{event.title}} {{event.dateStart}}</a></div></li>
+                </ul>
+
+            </div>
+        </div>
+    {{/each}}
+</script>
 
 </body>
 </html>

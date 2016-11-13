@@ -7,11 +7,14 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 import com.ticketfree.entity.bean.User;
 import com.ticketfree.service.dao.BaseDao;
+import com.ticketfree.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
@@ -31,12 +34,12 @@ public class TestController {
 
         User byId = baseDao.findById(User.class, 1);
 
-        System.out.println(byId.toString());
+   /*     System.out.println(byId.toString());
 
 
         List<Map<String, Object>> maps = jdbcTemplate.queryForList("SELECT * from USER");
 
-        System.out.println(maps);
+        System.out.println(maps);*/
 
 
 //        String page = "<html><head></head><body><h1>HTML to PDF</h1></body></html>";
@@ -96,6 +99,11 @@ public class TestController {
 
     @RequestMapping("test")
     public String test() {
+
+        User user = SessionUtil.getUser(baseDao);
+
+        System.out.println(user);
+
 
         return "index";
     }

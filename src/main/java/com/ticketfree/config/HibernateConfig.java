@@ -68,7 +68,7 @@ public class HibernateConfig {
         return dataSource;
     }
 
-    @Bean
+ /*   @Bean
     DataSource dataSourceJdbc() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName(DRIVER_CLASS_NAME);
@@ -76,10 +76,10 @@ public class HibernateConfig {
         ds.setPassword(dbPass);
         ds.setUsername(dbUser);
         return ds;
-    }
+    }*/
 
     @Bean
     JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSourceJdbc());
+        return new JdbcTemplate(dataSource());
     }
 }

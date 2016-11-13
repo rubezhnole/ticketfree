@@ -15,7 +15,7 @@ function MainPage() {
         }
 
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "/search",
             data: {
                 searchText: searchText

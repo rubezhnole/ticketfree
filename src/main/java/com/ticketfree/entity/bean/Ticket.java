@@ -2,8 +2,7 @@ package com.ticketfree.entity.bean;
 
 import com.ticketfree.entity.baseentity.HistoryEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ticket")
@@ -18,6 +17,8 @@ public class Ticket extends HistoryEntity {
 
     }
 
+    @ManyToOne
+    @JoinColumn(name="event")
     public Event getEvent() {
         return event;
     }
@@ -26,6 +27,8 @@ public class Ticket extends HistoryEntity {
         this.event = event;
     }
 
+    @ManyToOne
+    @JoinColumn(name="user")
     public User getUser() {
         return user;
     }

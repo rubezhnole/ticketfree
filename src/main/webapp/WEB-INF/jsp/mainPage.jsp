@@ -1,4 +1,18 @@
-<!-- Fixed navbar -->
+<html>
+<head>
+    <title>Free Ticket</title>
+
+    <script type="text/javascript" src="/resources/js/jquery.js"></script>
+    <script type="text/javascript" src="/resources/js/handlebars.js"></script>
+    <script type="text/javascript" src="/resources/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="/resources/js/mainPage.js"></script>
+    <script type="text/javascript" src="/resources/js/login.js"></script>
+
+    <link href="/resources/css/bootstrap.css" rel="stylesheet">
+    <link href="/resources/css/style.css" rel="stylesheet">
+</head>
+<body>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -8,13 +22,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Ticket FREE</a>
+            <a class="navbar-brand" href="/mainPage">Ticket FREE</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="/event/create" target="_blank">Create Event</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/ticket/load">My tickets</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -83,7 +97,7 @@
                     <tbody>
                     {{#each this}}
                         <tr>
-                            <td><a href="/event/load?eventId={{id}}" target="_blank">{{title}}</a></td>
+                            <td><a href="/event/load?eventId={{entityId}}" target="_blank">{{title}}</a></td>
                         </tr>
                     {{/each}}
                     </tbody>
@@ -92,3 +106,5 @@
         </div>
     </div>
 </script>
+</body>
+</html>

@@ -2,11 +2,7 @@ package com.ticketfree.entity.baseentity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import java.io.Serializable;
 
@@ -16,7 +12,7 @@ public class BaseEntity implements Serializable {
     private Integer entityId;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "entityId")
     public Integer getEntityId() {
         return entityId;
