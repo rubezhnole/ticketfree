@@ -7,9 +7,11 @@
     <script type="text/javascript" src="/resources/js/handlebars.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap.js"></script>
     <script type="text/javascript" src="/resources/js/event.js"></script>
+    <script type="text/javascript" src="/resources/js/datetimepicker.js"></script>
 
     <link href="/resources/css/bootstrap.css" rel="stylesheet">
     <link href="/resources/css/style.css" rel="stylesheet">
+    <link href="/resources/css/datetimepicker.css" rel="stylesheet">
 </head>
 <body>
 
@@ -59,8 +61,8 @@
                 <li class="list-group-item"><input class="form-control input-sm" id="eventTitle" type="text" placeholder="Title"/></li>
                 <li class="list-group-item"><input class="form-control input-sm" id="eventDescription" type="text" placeholder="Description"/></li>
                 <li class="list-group-item"><input class="form-control input-sm" id="eventVenue" type="text" placeholder="Venue"/></li>
-                <li class="list-group-item"><input class="form-control input-sm" id="dateStart" type="text" placeholder="Date start"/></li>
-                <li class="list-group-item"><input class="form-control input-sm" id="dateEnd" type="text" placeholder="Date end"/></li>
+                <li class="list-group-item"><input class="form-control input-sm datetimepicker"  id="dateStart" type="text" placeholder="Date start"/></li>
+                <li class="list-group-item"><input class="form-control input-sm datetimepicker" id="dateEnd" type="text" placeholder="Date end"/></li>
             </ul>
         </div>
     </div>
@@ -82,6 +84,13 @@
     $(function() {
         var event = new Event();
         event.init();
+
+        $(".datetimepicker").datetimepicker({
+            format: 'd-m-Y H:i',
+            formatTime:'H:i',
+            formatDate:'d.m.Y',
+            lang: 'uk'
+        });
     })
 </script>
 

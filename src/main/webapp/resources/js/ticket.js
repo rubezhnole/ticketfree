@@ -22,5 +22,9 @@ function Ticket() {
 
             }
         })
-    }
+    };
+
+    this.open = function(uuid) {
+        window.open("/ticket/loadTicket?uuid=" + uuid, "_blank");
+    };
 }

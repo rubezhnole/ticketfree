@@ -1,9 +1,11 @@
 package com.ticketfree.service.dao;
 
 import com.ticketfree.entity.baseentity.HistoryEntity;
+import com.ticketfree.entity.bean.Event;
 import com.ticketfree.entity.bean.Ticket;
 import com.ticketfree.entity.bean.User;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,11 +13,13 @@ public interface BaseDao {
 
     <T> T findById(Class<T> clazz, Integer id);
 
-    void save(HistoryEntity obj, User user);
+    Serializable save(HistoryEntity obj, User user);
 
     List<Ticket> loadTicketByEvent(Integer eventId);
 
     List<Ticket> loadTicketByUser(Integer userId);
+
+    List<Event> loadEventByUser(Integer userId);
 
     List<Ticket> loadTicketByEventAndUser(Integer eventId, Integer userId);
 

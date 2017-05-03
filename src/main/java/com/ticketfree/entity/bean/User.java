@@ -1,6 +1,7 @@
 package com.ticketfree.entity.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.JsonObject;
 import com.ticketfree.entity.baseentity.BaseEntity;
 
 import javax.persistence.Entity;
@@ -14,8 +15,10 @@ import java.util.List;
 public class User extends BaseEntity {
 
     private String username;
+    @JsonIgnore
     private String password;
 //    private String roles;
+    @JsonIgnore
     private String email;
     @JsonIgnore
     private List<Event> events;
@@ -63,5 +66,12 @@ public class User extends BaseEntity {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public JsonObject toJson() {
+        JsonObject json = new JsonObject();
+        json.addProperty("entityId", this.getEntityId());
+        json.addProperty("username", this.getUsername());
+        return json;
     }
 }

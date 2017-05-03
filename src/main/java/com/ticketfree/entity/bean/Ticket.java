@@ -1,5 +1,6 @@
 package com.ticketfree.entity.bean;
 
+import com.google.gson.JsonObject;
 import com.ticketfree.entity.baseentity.HistoryEntity;
 
 import javax.persistence.*;
@@ -51,5 +52,15 @@ public class Ticket extends HistoryEntity {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public JsonObject toJson() {
+        JsonObject json = new JsonObject();
+        json.addProperty("entityId", this.getEntityId());
+        json.add("event", this.getEvent().toJson());
+        json.add("user", this.getUser().toJson());
+        json.addProperty("active",  this.isActive());
+        json.addProperty("uuid", this.getUuid());
+        return json;
     }
 }

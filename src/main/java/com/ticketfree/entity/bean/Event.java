@@ -1,13 +1,15 @@
 package com.ticketfree.entity.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.JsonObject;
 import com.ticketfree.entity.baseentity.HistoryEntity;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "event")
@@ -19,7 +21,9 @@ public class Event extends HistoryEntity {
     private String title;
     private String description;
     private String venue; // place of meeting
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     private Date dateStart;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     private Date dateEnd;
 
     public Event() {
@@ -82,5 +86,17 @@ public class Event extends HistoryEntity {
 
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public JsonObject toJson() {
+        JsonObject json = new JsonObject();
+        json.addProperty("entityId", this.getEntityId());
+        json.addProperty("backgroundImage", this.getBackgroundImage());
+        json.addProperty("title", this.getTitle());
+        json.addProperty("description", this.getDescription());
+        json.addProperty("venue", this.getVenue());
+        json.addProperty("dateStart", DateFormatUtils.format(this.getDateStart(), "dd-MM-yyyy HH:mm"));
+        json.addProperty("dateEnd", DateFormatUtils.format(this.getDateEnd(), "dd-MM-yyyy HH:mm"));
+        return json;
     }
 }

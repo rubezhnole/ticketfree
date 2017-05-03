@@ -47,7 +47,7 @@ function Event() {
                 json: JSON.stringify(that.getObj())
             },
             success: function(resp) {
-                // open event page
+                document.location.href = "/event/load?eventId=" + resp;
             },
             error: function() {
 

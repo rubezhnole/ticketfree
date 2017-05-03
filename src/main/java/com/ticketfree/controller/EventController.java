@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 
 @Controller
@@ -44,9 +45,8 @@ public class EventController {
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
     public String save(String json) {
-
         try {
             User byId = baseDao.findById(User.class, 1);
 
@@ -55,18 +55,11 @@ public class EventController {
             event.setDateStart(new Date());
             event.setDateEnd(new Date());
 
-            baseDao.save(event, byId);
-
-            System.out.println(event
-            );
+            return baseDao.save(event, byId).toString();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return "";
     }
-
-
 }

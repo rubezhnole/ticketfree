@@ -31,12 +31,12 @@ public class BaseDaoImpl implements BaseDao {
         return getSession().get(clazz, id);
     }
 
-    public void save(HistoryEntity obj, User user) {
+    public Serializable save(HistoryEntity obj, User user) {
         obj.setCreateBy(user);
         obj.setEditBy(user);
         obj.setCreateDate(new Date());
         obj.setEditDate(new Date());
-        getSession().saveOrUpdate(obj);
+        return getSession().save(obj);
     }
 
     @Override
@@ -59,6 +59,11 @@ public class BaseDaoImpl implements BaseDao {
         return getSession().createCriteria(Ticket.class)
                 .add(Restrictions.eq("user.entityId", userId))
                 .list();
+    }
+
+    @Override
+    public List<Event> loadEventByUser(Integer userId) {
+        return null;
     }
 
     @Override

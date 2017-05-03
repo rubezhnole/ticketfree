@@ -76,9 +76,28 @@
     {{#each this}}
         <div class="row">
             <div class="col-md-12">
-                <ul class="list-group">
-                    <li class="list-group-item"><div><a href="/ticket/loadTicket?uuid={{uuid}}" target="_blank">{{event.title}} {{event.dateStart}}</a></div></li>
-                </ul>
+                <div class="row">
+                    <ul class="list-group">
+                        <li class="list-group-item"><div>{{event.title}} {{event.dateStart}}</div></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+
+                    </div>
+                    <div class="col-md-11">
+                        <ul class="list-group">
+                            {{#each tickets}}
+                            <li class="list-group-item"><div><a onclick="ticket.open('{{uuid}}')">{{event.title}} {{event.dateStart}}</a>
+                                {{#if active}}
+                                    ACTIVE
+                                {{else}}
+                                    NOT ACTIVE
+                                {{/if}}</div></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
 
             </div>
         </div>

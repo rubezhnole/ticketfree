@@ -30,15 +30,21 @@ public class TestQRGenerator {
         Document documento = new Document();
 
         try {
-        // Obtenemos una instancia de un objeto PDFWriter
-            PdfWriter.getInstance(documento, new FileOutputStream("D:\\web\\projects\\ticketFree\\src\\main\\java\\com\\ticketfree\\2.pdf"));
+
+
+            File file = new File("qrCode.pdf");
+
+
+            // Obtenemos una instancia de un objeto PDFWriter
+//            PdfWriter.getInstance(documento, new FileOutputStream("D:\\web\\projects\\ticketFree\\src\\main\\java\\com\\ticketfree\\2.pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream(file));
         // Abrimos el documento
         documento.open();
         // Seteamos a la variable el valor que deseamos que tenga el Codigo QR
         String textCodigoQR = "http://java-white-box.blogspot.com";
         // Realizamos una instancia de la clase la cual genera el Codigo QR
         // y seteamos el valor al codigo QR
-        BarcodeQRCode codigoBarrasQR = new BarcodeQRCode(textCodigoQR, 0, 0, null);
+        BarcodeQRCode codigoBarrasQR = new BarcodeQRCode(textCodigoQR, 200, 200, null);
         // Agregamos la imagen del codigo QR al documento
         documento.add(codigoBarrasQR.getImage());
         // Cerramos el documento
