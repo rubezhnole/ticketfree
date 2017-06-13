@@ -7,7 +7,6 @@ import com.itextpdf.text.pdf.BarcodeQRCode;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.codec.Base64;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 import com.ticketfree.entity.bean.Event;
 import com.ticketfree.entity.bean.Ticket;
 import com.ticketfree.entity.bean.User;

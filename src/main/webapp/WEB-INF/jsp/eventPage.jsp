@@ -7,9 +7,12 @@
     <script type="text/javascript" src="/resources/js/handlebars.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap.js"></script>
     <script type="text/javascript" src="/resources/js/ticket.js"></script>
+    <script type="text/javascript" src="/resources/js/eventForUser.js"></script>
+    <script type="text/javascript" src="/resources/js/datetimepicker.js"></script>
 
     <link href="/resources/css/bootstrap.css" rel="stylesheet">
     <link href="/resources/css/style.css" rel="stylesheet">
+    <link href="/resources/css/datetimepicker.css" rel="stylesheet">
 </head>
 <body>
 
@@ -33,8 +36,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="#">Home</a></li>
                 <li><a href="/event/create" target="_blank">Create Event</a></li>
-                <li class="active"><a href="/ticket/load">My tickets</a></li>
-                <li><a href="/event/loadForUser">My events</a></li>
+                <li><a href="/ticket/load">My tickets</a></li>
+                <li class="active"><a href="/event/loadForUser">My events</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -54,7 +57,7 @@
 </nav>
 
 <!-- Begin page content -->
-<div class="container" id="ticketContainer">
+<div class="container" id="eventContainer">
 
 </div>
 
@@ -65,43 +68,34 @@
 </footer>
 
 <script>
-    var ticket = new Ticket();
+    var eventForUser = new EventForUser();
 
     $(function() {
-        ticket.init();
-        ticket.load();
+        eventForUser.init();
+        eventForUser.loadForUserData();
     })
 </script>
 
-<script id="ticketTemplate" type="text/x-handlebars-template">
+<script id="eventTemplate" type="text/x-handlebars-template">
     {{#each this}}
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <ul class="list-group">
-                        <li class="list-group-item"><div>{{event.title}} {{event.dateStart}}</div></li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <div class="col-md-1">
-
-                    </div>
-                    <div class="col-md-11">
-                        <ul class="list-group">
-                            {{#each tickets}}
-                            <li class="list-group-item"><div><a onclick="ticket.open('{{uuid}}')">{{event.title}} {{event.dateStart}}</a>
-                                {{#if active}}
-                                    ACTIVE
-                                {{else}}
-                                    NOT ACTIVE
-                                {{/if}}</div></li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <ul class="list-group">
+                    <li class="list-group-item"><div>{{title}} {{dateStart}}</div></li>
+                    <li class="list-group-item"><input value="{{title}}" class="form-control input-sm" id="eventTitle" type="text" placeholder="Title"/></li>
+                    <li class="list-group-item"><input value="{{description}}" class="form-control input-sm" id="eventDescription" type="text" placeholder="Description"/></li>
+                    <li class="list-group-item"><input value="{{venue}}" class="form-control input-sm" id="eventVenue" type="text" placeholder="Venue"/></li>
+                    <li class="list-group-item"><input value="{{dateStart}}" class="form-control input-sm datetimepicker"  id="dateStart" type="text" placeholder="Date start"/></li>
+                    <li class="list-group-item"><input value="{{dateEnd}}" class="form-control input-sm datetimepicker" id="dateEnd" type="text" placeholder="Date end"/></li>
+                </ul>
+            </div>
+            <div class="row">
 
             </div>
+
         </div>
+    </div>
     {{/each}}
 </script>
 

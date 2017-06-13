@@ -1,38 +1,23 @@
 package com.ticketfree.controller;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.tool.xml.XMLWorkerHelper;
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
-import com.ticketfree.entity.bean.User;
-import com.ticketfree.service.dao.BaseDao;
-import com.ticketfree.util.SessionUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.FileOutputStream;
-import java.util.List;
-import java.util.Map;
 
 
 @Controller
 public class TestController {
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    BaseDao baseDao;
+//    @Autowired
+//    JdbcTemplate jdbcTemplate;
+//
+//    @Autowired
+//    BaseDao baseDao;
 
     @RequestMapping("/tests")
     public String index() {
 
-        User byId = baseDao.findById(User.class, 1);
+//        User byId = baseDao.findById(User.class, 1);
 
    /*     System.out.println(byId.toString());
 
@@ -100,9 +85,9 @@ public class TestController {
     @RequestMapping("test")
     public String test() {
 
-        User user = SessionUtil.getUser(baseDao);
-
-        System.out.println(user);
+//        User user = SessionUtil.getUser(baseDao);
+//
+//        System.out.println(user);
 
 
         return "index";

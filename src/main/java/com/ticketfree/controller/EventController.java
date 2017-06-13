@@ -1,6 +1,7 @@
 package com.ticketfree.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.JsonArray;
 import com.ticketfree.entity.bean.Event;
 import com.ticketfree.entity.bean.User;
 import com.ticketfree.service.dao.BaseDao;
@@ -13,7 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("event")
@@ -52,13 +56,46 @@ public class EventController {
 
             Event event = JacksonUtil.toObj(json, Event.class);
             event.setMainUser(byId);
-            event.setDateStart(new Date());
-            event.setDateEnd(new Date());
 
             return baseDao.save(event, byId).toString();
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        return "";
+    }
+
+    @RequestMapping("loadForUser")
+    public ModelAndView loadForUser(ModelAndView mav) {
+
+        mav.setViewName("eventPage");
+        return mav;
+    }
+
+    @RequestMapping("loadForUserData")
+    @ResponseBody
+    public String loadForUserData() {
+        User byId = baseDao.findById(User.class, 1);
+        List<Event> events = baseDao.loadEventByUser(byId.getEntityId())
+                .stream()
+                .sorted(Comparator.comparing(Event::getDateStart).reversed())
+                .collect(Collectors.toList());
+
+        JsonArray result = new JsonArray();
+        events.forEach(t -> result.add(t.toJson()));
+        return result.toString();
+    }
+
+
+    @RequestMapping("update")
+    @ResponseBody
+    public String update() {
+        User byId = baseDao.findById(User.class, 1);
+
+        Event event = new Event();
+
+        if (!event.getMainUser().equals(byId)) {
+            throw new IllegalArgumentException("This user not modify event.");
         }
         return "";
     }

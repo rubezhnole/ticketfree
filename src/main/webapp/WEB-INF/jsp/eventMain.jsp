@@ -33,6 +33,7 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="/event/create" target="_blank">Create Event</a></li>
                 <li><a href="/ticket/load">My tickets</a></li>
+                <li><a href="/event/loadForUser">My events</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Dropdown <span class="caret"></span></a>

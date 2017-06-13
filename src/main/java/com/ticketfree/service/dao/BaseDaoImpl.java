@@ -63,7 +63,12 @@ public class BaseDaoImpl implements BaseDao {
 
     @Override
     public List<Event> loadEventByUser(Integer userId) {
-        return null;
+        if (null == userId) {
+            return new ArrayList<>();
+        }
+        return getSession().createCriteria(Event.class)
+                .add(Restrictions.eq("mainUser.entityId", userId))
+                .list();
     }
 
     @Override
@@ -71,7 +76,6 @@ public class BaseDaoImpl implements BaseDao {
         if (null == eventId || null == userId) {
             return new ArrayList<>();
         }
-
         return getSession().createCriteria(Ticket.class)
                 .add(Restrictions.eq("event.entityId", eventId))
                 .add(Restrictions.eq("user.entityId", userId))
